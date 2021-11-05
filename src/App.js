@@ -20,17 +20,24 @@ function App() {
     setCart([...cart, item]);
   };
 
+  const removeItem = (index) => {
+    let updatedCart = cart.map((item) => item);
+    updatedCart.splice(index, 1);
+    setCart(updatedCart);
+    console.log(cart);
+  };
+
   return (
     <ProductContext.Provider value={{ products, addItem }}>
-      <CartContext.Provider value={{ cart }}>
+      <CartContext.Provider value={{ cart, removeItem }}>
         <div className="App">
-          <Navigation cart={cart} />
+          <Navigation />
           {/* Routes */}
           <Route exact path="/">
             <Products />
           </Route>
           <Route path="/cart">
-            <ShoppingCart cart={cart} />
+            <ShoppingCart />
           </Route>
         </div>
       </CartContext.Provider>
